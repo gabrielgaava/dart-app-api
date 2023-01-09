@@ -1,6 +1,7 @@
 import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_plus/shelf_plus.dart';
 import 'routes/index.dart';
+import 'settings/database.dart';
 
 void main(List<String> arguments) async {
   var routes = RouterIndex().build();
@@ -14,6 +15,3 @@ void main(List<String> arguments) async {
 
   print('Serving at http://${server.address.host}:${server.port}');
 }
-
-Response _echoRequest(Request request) =>
-    Response.ok('Request for "${request.url}"');

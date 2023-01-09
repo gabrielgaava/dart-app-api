@@ -1,20 +1,22 @@
 import 'package:shelf/shelf.dart';
 import 'dart:convert';
 import '../models/User.dart';
+import '../settings/database.dart';
 
 class UserController {
   UserController();
 
   Future<Response> listUsers(Request request) async {
-    User user1 = User("Gabriel Gava", "nero.gava@gmail.com");
-    User user2 = User("Maikel Oliveira", "maikel@gmail.com");
-    List<User> users = [user1, user2];
-
+    var data = await Database().query("select * from users", null);
+    List<User> users = List<User>.from((data.map((i) => User.fromJson(i))));
     return Response.ok(jsonEncode(users));
   }
 
   Future<Response> getUser(Request request, String id) async {
-    User user1 = User("Gabriel Gava", "nero.gava@gmail.com");
-    return Response.ok(jsonEncode(user1));
+    var data = await Database()
+        .query("select * from users where id = @id", {"id": id});
+
+    var response = User.fromJson(data);
+    return Response.ok(jsonEncode(response));
   }
 }

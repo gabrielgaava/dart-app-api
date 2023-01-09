@@ -1,6 +1,6 @@
 import 'package:shelf_plus/shelf_plus.dart';
-import '../controllers/UserController.dart';
 import '../middlewares/auth.dart';
+import '../controllers/UserController.dart';
 
 class UserRoutes {
   compose(RouterPlus app) {
